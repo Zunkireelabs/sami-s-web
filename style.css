@@ -156,7 +156,7 @@ body.drawer-open{overflow:hidden}
 .product__sub{font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
 .stars{height:18px;margin:0 auto 22px;width:110px;background:
   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 18'%3E%3Cpath fill='%23032b2c' d='M11 1l2.6 5.6 6 .7-4.5 4.1 1.2 6L11 14.4 5.7 17.4l1.2-6L2.4 7.3l6-.7z'/%3E%3C/svg%3E") repeat-x left/22px 18px}
-.product__img{width:100%;max-width:300px;margin:0 auto 18px;aspect-ratio:1;object-fit:cover}
+.product__img{width:100%;height:auto;max-width:300px;margin:0 auto 18px;aspect-ratio:1;object-fit:cover}
 .product__title{font-size:22px;margin-bottom:2px}
 .product__price{font-size:16px;margin-bottom:12px}
 .product__desc{font-size:14px;margin-bottom:22px}
@@ -202,7 +202,7 @@ body.drawer-open{overflow:hidden}
 .stylists__grid{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:22px}
 .stylist{text-align:center}
 .stylist a:not([target]){display:block;overflow:hidden;margin-bottom:14px}
-.stylist img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .8s}
+.stylist img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;transition:transform .8s}
 .stylist a:hover img{transform:scale(1.05)}
 .stylist h3{font-size:22px}
 .stylist p{font-size:14px;margin:4px 0 10px}
