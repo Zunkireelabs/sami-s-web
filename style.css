@@ -1,0 +1,251 @@
+:root{
+  --cream:#efe9d9;
+  --teal:#032b2c;
+  --green:#00341e;
+  --yellow:#fbcd0a;
+  --serif:'Newsreader','New York','Iowan Old Style',Baskerville,Georgia,serif;
+  --body:'Assistant',sans-serif;
+  --italic:'Baskervville',serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--teal);font-family:var(--serif);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4,h5{font-weight:400;margin:0}
+p{margin:0 0 1em}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-block;font-family:var(--serif);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:15px 30px;border:1px solid var(--teal);cursor:pointer;transition:background .25s,color .25s,border-color .25s;background:none;color:var(--teal)}
+.btn--solid{background:var(--teal);color:var(--cream)}
+.btn--solid:hover{background:transparent;color:var(--teal)}
+.btn--outline:hover{background:var(--teal);color:var(--cream)}
+.btn--light{border-color:#fff;color:#fff}
+.btn--light:hover{background:#fff;color:var(--teal)}
+
+/* ---------- header ---------- */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:50;color:#fff;transition:background .3s,color .3s,box-shadow .3s}
+.site-header__inner{max-width:1600px;margin:0 auto;padding:16px 30px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px}
+.site-header.scrolled{background:var(--cream);color:var(--teal);box-shadow:0 1px 0 rgba(3,43,44,.1)}
+.logo{grid-column:2;grid-row:1;justify-self:center;display:block;width:155px;position:relative}
+.logo img{width:100%;height:auto}
+.logo__alt{display:block}
+.logo__main{display:none}
+.site-header.scrolled .logo__alt{display:none}
+.site-header.scrolled .logo__main{display:block}
+.nav{grid-column:1;grid-row:1;display:flex;gap:28px;align-items:center}
+.nav a,.soonest{font-family:var(--serif);font-size:15px;text-decoration:none;letter-spacing:.02em}
+.nav a:hover{text-decoration:underline;text-underline-offset:5px}
+.nav__drop{position:relative;padding:12px 0}
+.nav__menu{position:absolute;top:100%;left:-16px;min-width:210px;background:var(--cream);color:var(--teal);padding:14px 0;display:none;box-shadow:0 12px 30px rgba(3,43,44,.15)}
+.nav__menu a{display:block;padding:7px 22px}
+.nav__drop:hover .nav__menu{display:block}
+.tools{grid-column:3;grid-row:1;display:flex;gap:20px;align-items:center;justify-content:flex-end}
+.soonest{border:1px solid currentColor;padding:9px 18px;font-size:11px;letter-spacing:.14em;transition:background .25s,color .25s}
+.soonest:hover{background:#fff;color:var(--teal)}
+.site-header.scrolled .soonest:hover{background:var(--teal);color:var(--cream)}
+.icon-link{display:flex;position:relative}
+.cart-count{position:absolute;top:-7px;right:-9px;background:var(--yellow);color:var(--teal);font-size:10px;line-height:1;border-radius:10px;min-width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-family:var(--body);font-weight:600}
+.menu-btn{display:none;background:none;border:0;color:inherit;align-items:center;gap:10px;cursor:pointer;font-family:var(--serif);font-size:15px;padding:0;grid-column:1;grid-row:1;justify-self:start}
+.menu-btn__bars{display:flex;flex-direction:column;gap:5px}
+.menu-btn__bars i{display:block;width:22px;height:1.5px;background:currentColor}
+
+/* ---------- drawer ---------- */
+.drawer-overlay{position:fixed;inset:0;background:rgba(3,43,44,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:90}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:min(380px,88vw);background:var(--cream);z-index:100;padding:70px 32px 32px;transform:translateX(-100%);transition:transform .35s ease;overflow-y:auto;display:flex;flex-direction:column;gap:6px}
+.drawer a:not(.btn){font-size:20px;text-decoration:none;padding:6px 0}
+.drawer__sub{padding-left:16px;display:flex;flex-direction:column;border-left:1px solid rgba(3,43,44,.2);margin-bottom:6px}
+.drawer__sub a{font-size:16px!important}
+.drawer .btn{margin-top:14px;text-align:center}
+.drawer__close{position:absolute;top:16px;right:22px;background:none;border:0;font-size:36px;line-height:1;color:var(--teal);cursor:pointer}
+.drawer__resched{margin-top:28px;font-size:14px}
+.drawer__resched p{margin:6px 0}
+body.drawer-open .drawer{transform:none}
+body.drawer-open .drawer-overlay{opacity:1;pointer-events:auto}
+body.drawer-open{overflow:hidden}
+
+/* ---------- editorial split ---------- */
+.editorial{display:grid;grid-template-columns:1fr 1fr;min-height:600px;background:var(--cream)}
+.editorial:first-of-type{min-height:100vh}
+.editorial__img{position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;min-height:600px}
+.editorial__img>img,.editorial__img>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.editorial__img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,43,44,.28) 0%,rgba(3,43,44,0) 30%,rgba(3,43,44,.28) 100%)}
+.editorial__img-content{position:relative;z-index:2;padding:60px;text-align:center;max-width:520px}
+.sound-btn{position:absolute;left:28px;bottom:28px;z-index:3;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.8);background:rgba(3,43,44,.25);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:background .25s,color .25s,border-color .25s}
+.sound-btn:hover{background:#fff;color:var(--teal);border-color:#fff}
+.sound-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+/* floating "vibe" music toggle — sits above the chat widget, bottom right */
+.vibe-btn{position:fixed;right:24px;bottom:104px;z-index:60;display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:999px;border:1px solid var(--teal);background:var(--teal);color:var(--cream);font-family:var(--serif);font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 20px rgba(3,43,44,.22);transition:background .25s,color .25s,opacity .25s}
+.vibe-btn:hover{background:var(--cream);color:var(--teal)}
+.vibe-btn:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.vibe-btn__label{line-height:1}
+.vibe-btn .vibe-btn__off{display:none}
+.vibe-btn[aria-pressed="false"]{background:transparent;color:var(--teal);box-shadow:none}
+.vibe-btn[aria-pressed="false"] .vibe-btn__on{display:none}
+.vibe-btn[aria-pressed="false"] .vibe-btn__off{display:block}
+.vibe-btn[aria-pressed="false"]:hover{background:var(--teal);color:var(--cream)}
+
+/* the pup that sits on top of the pill */
+.pet{position:absolute;left:50%;bottom:calc(100% - 9px);transform:translateX(-50%);overflow:visible;pointer-events:none}
+.pet__all,.pet__head,.pet__ear,.pet__tail,.pet__zzz{transform-box:fill-box}
+.pet__all{transform-origin:50% 100%;animation:pet-bounce 1.05s ease-in-out infinite}
+.pet__head{transform-origin:50% 92%;animation:pet-bob 1.05s ease-in-out infinite}
+.pet__ear{transform-origin:50% 12%}
+.pet__ear--l{animation:pet-ear-l 1.05s ease-in-out infinite}
+.pet__ear--r{animation:pet-ear-r 1.05s ease-in-out infinite}
+.pet__tail{transform-origin:0% 100%;animation:pet-wag .42s ease-in-out infinite}
+.pet__eyes-shut{display:none}
+.pet__zzz{opacity:0;transform-origin:0% 100%}
+@keyframes pet-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+@keyframes pet-bob{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes pet-ear-l{0%,100%{transform:rotate(9deg)}50%{transform:rotate(-7deg)}}
+@keyframes pet-ear-r{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(7deg)}}
+@keyframes pet-wag{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(15deg)}}
+@keyframes pet-zzz{0%{opacity:0;transform:translate(0,2px) scale(.8)}30%{opacity:1}100%{opacity:0;transform:translate(3px,-6px) scale(1)}}
+/* hover: the pup gets excited */
+.vibe-btn:hover .pet__all{animation-duration:.66s}
+.vibe-btn:hover .pet__head,.vibe-btn:hover .pet__ear{animation-duration:.66s}
+.vibe-btn:hover .pet__tail{animation-duration:.26s}
+/* vibe off: the pup dozes off */
+.vibe-btn[aria-pressed="false"] .pet__all,
+.vibe-btn[aria-pressed="false"] .pet__head,
+.vibe-btn[aria-pressed="false"] .pet__ear,
+.vibe-btn[aria-pressed="false"] .pet__tail{animation:none}
+.vibe-btn[aria-pressed="false"] .pet__head{transform:rotate(9deg) translateY(1.5px)}
+.vibe-btn[aria-pressed="false"] .pet__tail{transform:rotate(-16deg)}
+.vibe-btn[aria-pressed="false"] .pet__eyes-open{display:none}
+.vibe-btn[aria-pressed="false"] .pet__eyes-shut{display:block}
+.vibe-btn[aria-pressed="false"] .pet__tongue{display:none}
+.vibe-btn[aria-pressed="false"] .pet__zzz{animation:pet-zzz 2.6s ease-out infinite}
+@media (prefers-reduced-motion:reduce){
+  .pet__all,.pet__head,.pet__ear,.pet__tail,.pet__zzz{animation:none}
+}
+
+/* the little listener: head bobs and a note floats while the vibe is on */
+.vibe-char{overflow:visible;flex:none}
+.vibe-char__head,.vibe-char__note{transform-box:fill-box}
+.vibe-char__head{transform-origin:50% 95%;animation:vibe-bob 1.05s ease-in-out infinite}
+.vibe-char__note{transform-origin:50% 100%;animation:vibe-note 1.8s ease-out infinite}
+@keyframes vibe-bob{
+  0%,100%{transform:rotate(-9deg) translateY(0)}
+  50%{transform:rotate(9deg) translateY(-.7px)}
+}
+@keyframes vibe-note{
+  0%{opacity:0;transform:translate(0,2px) scale(.7)}
+  25%{opacity:1}
+  70%{opacity:1;transform:translate(1.5px,-3px) scale(1)}
+  100%{opacity:0;transform:translate(3px,-5px) scale(.9)}
+}
+/* vibe off: the character stops dancing and the note disappears */
+.vibe-btn[aria-pressed="false"] .vibe-char__head{animation:none;transform:rotate(0)}
+.vibe-btn[aria-pressed="false"] .vibe-char__note{animation:none;opacity:.25}
+@media (prefers-reduced-motion:reduce){
+  .vibe-char__head,.vibe-char__note{animation:none}
+}
+@media (max-width:767px){.vibe-btn{right:16px;bottom:92px;padding:9px 14px;font-size:10px}}
+.sound-btn .sound-btn__on{display:none}
+.sound-btn[aria-pressed="true"] .sound-btn__on{display:block}
+.sound-btn[aria-pressed="true"] .sound-btn__muted{display:none}
+.overline{font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;color:var(--green)}
+.overline--light{color:#fff}
+.editorial__headline{font-size:48px;line-height:1.2;margin-bottom:26px}
+.editorial__headline--light{color:#fff}
+.editorial__product{display:flex;align-items:center;justify-content:center;padding:60px}
+.product{max-width:400px;text-align:center}
+.product__headline{font-size:24px;line-height:1.2;color:var(--green);margin-bottom:6px}
+.product__sub{font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+.stars{height:18px;margin:0 auto 22px;width:110px;background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 18'%3E%3Cpath fill='%23032b2c' d='M11 1l2.6 5.6 6 .7-4.5 4.1 1.2 6L11 14.4 5.7 17.4l1.2-6L2.4 7.3l6-.7z'/%3E%3C/svg%3E") repeat-x left/22px 18px}
+.product__img{width:100%;max-width:300px;margin:0 auto 18px;aspect-ratio:1;object-fit:cover}
+.product__title{font-size:22px;margin-bottom:2px}
+.product__price{font-size:16px;margin-bottom:12px}
+.product__desc{font-size:14px;margin-bottom:22px}
+.add-to-cart.added{background:var(--yellow);border-color:var(--yellow);color:var(--teal)}
+
+/* ---------- intro ---------- */
+.intro{padding:100px 24px;text-align:center}
+.intro__inner{max-width:720px;margin:0 auto}
+.subheader{font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px}
+.feature-header{font-size:clamp(28px,4vw,44px);line-height:1.2;margin-bottom:20px}
+.feature-header--large{font-size:clamp(32px,5vw,56px)}
+.intro p{font-size:18px;line-height:1.7;margin-bottom:34px}
+
+/* ---------- testimonials ---------- */
+.testimonials{max-width:1400px;margin:0 auto;padding:30px 10px 70px;overflow:hidden}
+.carousel{overflow:hidden}
+.track{display:flex;width:fit-content;animation:scroll calc(var(--n,10) * 5s) linear infinite}
+.track:hover{animation-play-state:paused}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.slide{flex:0 0 100vw;max-width:1400px;padding:0 20px}
+.slide__content{max-width:900px;margin:0 auto;text-align:center}
+.slide .stars{margin-bottom:20px}
+.slide blockquote{margin:0 0 20px;font-family:var(--italic);font-style:italic;font-size:18px;line-height:1.6;letter-spacing:.01em}
+.slide cite{font-family:var(--body);font-style:normal;font-size:14px;letter-spacing:.02em}
+
+/* ---------- gallery ---------- */
+.gallery__row{display:grid;grid-template-columns:repeat(3,1fr)}
+.gallery__item{position:relative;height:580px;overflow:hidden}
+.gallery__item>img:first-child,.gallery__item video{width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.13,.88,.62,1)}
+.gallery__item:hover>img:first-child,.gallery__item:hover video{transform:scale(1.04)}
+.gallery__logo{position:absolute;left:50%;top:50%;width:200px;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 2px 12px rgba(0,0,0,.25))}
+
+/* ---------- feedback ---------- */
+.feedback{padding:110px 24px;background:var(--cream)}
+.feedback__inner{max-width:760px;margin:0 auto}
+.feedback__icon{width:180px;margin-bottom:20px}
+.rte{font-size:17px;line-height:1.75;margin-bottom:34px}
+.rte em{font-style:italic}
+
+/* ---------- stylists ---------- */
+.stylists{padding:20px 24px 100px}
+.stylists__head{text-align:center;margin-bottom:50px}
+.stylists__grid{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:22px}
+.stylist{text-align:center}
+.stylist a:not([target]){display:block;overflow:hidden;margin-bottom:14px}
+.stylist img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .8s}
+.stylist a:hover img{transform:scale(1.05)}
+.stylist h3{font-size:22px}
+.stylist p{font-size:14px;margin:4px 0 10px}
+.stylist a[target]{font-size:13px;text-underline-offset:3px}
+
+/* ---------- editorial dark ---------- */
+.editorial--dark .overline{color:#fff}
+.stripe{height:18px;overflow:hidden;line-height:0}
+.stripe img{width:100%;height:18px;object-fit:cover}
+
+/* ---------- footer ---------- */
+.footer{background:var(--teal);color:var(--cream)}
+.footer__inner{max-width:1200px;margin:0 auto;padding:70px 24px 40px;display:grid;grid-template-columns:1.3fr 1fr;gap:60px}
+.footer__info img{margin-bottom:20px;border-radius:2px}
+.footer__info p{margin-bottom:10px}
+.footer__ig{display:inline-flex;gap:8px;align-items:center;margin-top:14px;text-decoration:none}
+.footer h5{font-size:18px;margin-bottom:16px}
+.footer ul{list-style:none;margin:0;padding:0;columns:2}
+.footer li{padding:3px 0}
+.footer a{text-underline-offset:3px}
+.footer__legal{border-top:1px solid rgba(239,233,217,.2);padding:20px 24px;display:flex;flex-wrap:wrap;gap:22px;justify-content:center;font-size:13px}
+.footer__legal span{opacity:.7}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .nav,.soonest{display:none}
+  .menu-btn{display:flex}
+  .tools{gap:16px}
+  .stylists__grid{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:767px){
+  .site-header__inner{padding:12px 18px}
+  .logo{width:120px}
+  .editorial{grid-template-columns:1fr}
+  .editorial__img{min-height:520px}
+  .editorial:first-of-type{min-height:0}
+  .editorial__headline{font-size:36px}
+  .editorial__product,.editorial__img-content{padding:44px 24px}
+  .gallery__row{grid-template-columns:1fr}
+  .gallery__item{height:520px}
+  .stylists__grid{grid-template-columns:repeat(2,1fr);gap:28px 16px}
+  .footer__inner{grid-template-columns:1fr;gap:40px}
+  .intro,.feedback{padding:70px 22px}
+}
+@media (prefers-reduced-motion:reduce){.track{animation:none}html{scroll-behavior:auto}}
