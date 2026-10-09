@@ -21,6 +21,36 @@
   drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setDrawer(false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setDrawer(false); });
 
+  // lazy video loading — posters show first; a video only downloads when it nears the
+  // viewport, uses the small file on phones, and pauses when scrolled away (saves data + battery)
+  var lazyVideos = [].slice.call(document.querySelectorAll('video[data-src]'));
+  var smallScreen = window.matchMedia('(max-width:767px)').matches;
+  var conn = navigator.connection || {};
+  var skipVideo = conn.saveData || window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function loadVideo(v) {
+    if (v.getAttribute('src')) return;
+    v.src = (smallScreen && v.dataset.srcM) ? v.dataset.srcM : v.dataset.src;
+    v.load();
+  }
+  function playVideo(v) {
+    loadVideo(v);
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  }
+
+  if (!skipVideo && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) playVideo(en.target);
+        else if (en.target.getAttribute('src')) en.target.pause();
+      });
+    }, { rootMargin: '200px 0px', threshold: 0.01 });
+    lazyVideos.forEach(function (v) { io.observe(v); });
+  } else if (!skipVideo) {
+    lazyVideos.forEach(playVideo);
+  }
+
   // video sound toggles — only one video may be unmuted at a time
   var soundBtns = [].slice.call(document.querySelectorAll('.js-sound'));
   var videos = [].slice.call(document.querySelectorAll('.js-video'));
@@ -79,7 +109,7 @@
     btn.setAttribute('aria-pressed', String(!muted));
     btn.setAttribute('aria-label', muted ? 'Unmute video' : 'Mute video');
     // a click counts as the gesture browsers require before audio may play
-    if (!muted && video.paused) { video.play(); }
+    if (!muted && video.paused) { playVideo(video); }
   }
 
   soundBtns.forEach(function (btn) {
